@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - SubCamera
+  - Tool
+  - Storage
+  - Book
   layers:
   - Default
   - TransparentFX

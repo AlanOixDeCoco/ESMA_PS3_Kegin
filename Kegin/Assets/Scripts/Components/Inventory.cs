@@ -5,50 +5,53 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     // Private exposed variables
+    [SerializeField] private string _name = "Inventory";
     [SerializeField] private bool _stack = true;
 
     // Private variables
-    private List<IngredientSO> _ingredients = new List<IngredientSO>();
+    private List<IngredientSO> _ingredientsSOs = new List<IngredientSO>();
     private Dictionary<IngredientSO, int> _ingredientsQuantities = new Dictionary<IngredientSO, int>();
 
     // Properties
-    public List<IngredientSO> Ingredients { get => _ingredients; private set => _ingredients = value; }
+    public List<IngredientSO> Ingredients { get => _ingredientsSOs; private set => _ingredientsSOs = value; }
     public Dictionary<IngredientSO, int> IngredientsQuantities { get => _ingredientsQuantities; private set => _ingredientsQuantities = value; }
+    public bool Stack { get => _stack; private set => _stack = value; }
+    public string Name { get => _name; }
 
     // Methods
-    public void AddIngredient(IngredientSO ingredient)
+    public bool AddIngredient(IngredientSO ingredientSO)
     {
-        if (_stack)
+        if (Stack)
         {
-            if (_ingredients.Contains(ingredient)) _ingredientsQuantities[ingredient]++;
+            if (_ingredientsSOs.Contains(ingredientSO)) _ingredientsQuantities[ingredientSO]++;
             else
             {
-                _ingredients.Add(ingredient);
-                _ingredientsQuantities.Add(ingredient, 1);
+                _ingredientsSOs.Add(ingredientSO);
+                _ingredientsQuantities.Add(ingredientSO, 1);
             }
         }
         else
         {
-            _ingredients.Add(ingredient);
+            if (_ingredientsSOs.Contains(ingredientSO)) return false;
+            _ingredientsSOs.Add(ingredientSO);
         }
-
-        if(IngredientsQuantities[ingredient] == 1000) Debug.Log(ingredient + ": " + IngredientsQuantities[ingredient]);
+        return true;
     }
 
-    public void RemoveIngredient(IngredientSO ingredient)
+    public void RemoveIngredient(IngredientSO ingredientSO)
     {
-        if (_stack)
+        if (Stack)
         {
-            _ingredientsQuantities[ingredient]--;
-            if (_ingredientsQuantities[ingredient] == 0)
+            _ingredientsQuantities[ingredientSO]--;
+            if (_ingredientsQuantities[ingredientSO] == 0)
             {
-                _ingredientsQuantities.Remove(ingredient);
-                _ingredients.Remove(ingredient);
+                _ingredientsQuantities.Remove(ingredientSO);
+                _ingredientsSOs.Remove(ingredientSO);
             }
         }
         else
         {
-            _ingredients.Remove(ingredient);
+            _ingredientsSOs.Remove(ingredientSO);
         }
     }
 }

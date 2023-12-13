@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e158ea87ca6f5498bd4d23d23a873f, type: 3}
   m_Name: ingredient_Garlic
   m_EditorClassIdentifier: 
-  _texture: {fileID: 2800000, guid: 7c0d4e341dd15b344a5767022b51ee97, type: 3}
+  _sprite: {fileID: 21300000, guid: 7c0d4e341dd15b344a5767022b51ee97, type: 3}
   _name: Garlic
   _storage: 2
   _finalProduct: 0

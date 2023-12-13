@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e158ea87ca6f5498bd4d23d23a873f, type: 3}
   m_Name: ingredient_Caramel
   m_EditorClassIdentifier: 
-  _texture: {fileID: 2800000, guid: 2ce28de8a337c154daf8f172cb6cadae, type: 3}
+  _sprite: {fileID: 21300000, guid: 2ce28de8a337c154daf8f172cb6cadae, type: 3}
   _name: Caramel
   _storage: 1
   _finalProduct: 0

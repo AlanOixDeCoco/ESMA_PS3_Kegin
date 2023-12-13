@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class StoragesFiller : MonoBehaviour
 {
-    [SerializeField] private Inventory shelves, fridge, locker;
+    [SerializeField] private Inventory _shelves, _fridge, _locker;
+    [SerializeField] private UIManager _uiManager;
 
-    [SerializeField] private List<IngredientSO> _ingredients = new List<IngredientSO>();
+    [SerializeField] private List<IngredientSO> _ingredientsSOs = new List<IngredientSO>();
     [SerializeField] private List<int> _ingredientsQuantities = new List<int>();
 
     private void OnValidate()
     {
-        while(_ingredientsQuantities.Count < _ingredients.Count)
+        while(_ingredientsQuantities.Count < _ingredientsSOs.Count)
         {
             if (_ingredientsQuantities.Count > 0) _ingredientsQuantities.Add(_ingredientsQuantities[_ingredientsQuantities.Count - 1]);
             else _ingredientsQuantities.Add(1);
         }
-        while (_ingredientsQuantities.Count > _ingredients.Count)
+        while (_ingredientsQuantities.Count > _ingredientsSOs.Count)
         {
             _ingredientsQuantities.RemoveAt(_ingredientsQuantities.Count - 1);
         }
@@ -24,31 +25,33 @@ public class StoragesFiller : MonoBehaviour
 
     private void Start()
     {
-        foreach(var ingredient in _ingredients)
+        foreach (var ingredientSO in _ingredientsSOs)
         {
-            switch (ingredient.Storage)
+            switch (ingredientSO.Storage)
             {
                 case StorageTypes.dry:
-                    for(int i = 0; i < _ingredientsQuantities[_ingredients.IndexOf(ingredient)]; i++)
+                    for(int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
                     {
-                        locker.AddIngredient(ingredient);
+                        _locker.AddIngredient(ingredientSO);
                     }
                     break;
                 case StorageTypes.cold:
-                    for (int i = 0; i < _ingredientsQuantities[_ingredients.IndexOf(ingredient)]; i++)
+                    for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
                     {
-                        fridge.AddIngredient(ingredient);
+                        _fridge.AddIngredient(ingredientSO);
                     }
                     break;
                 case StorageTypes.shelf:
-                    for (int i = 0; i < _ingredientsQuantities[_ingredients.IndexOf(ingredient)]; i++)
+                    for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
                     {
-                        shelves.AddIngredient(ingredient);
+                        _shelves.AddIngredient(ingredientSO);
                     }
                     break;
                 default:
                     break;
             }
         }
+
+        _uiManager.Setup();
     }
 }

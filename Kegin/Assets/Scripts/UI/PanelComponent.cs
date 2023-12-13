@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PanelComponent : MonoBehaviour
@@ -10,14 +11,16 @@ public class PanelComponent : MonoBehaviour
 
     [SerializeField] private Transform _panelArea;
 
+    [SerializeField] private Color _openColor;
+
     private void Awake()
     {
         if (_panelArea == null) _panelArea = transform.GetChild(0);
+        GetComponent<Image>().color = Color.clear;
     }
 
     public async void OpenPanel()
     {
-        GetComponent<Image>().enabled = true;
         _panelArea.gameObject.SetActive(true);
 
         float scale = 0;
@@ -25,8 +28,10 @@ public class PanelComponent : MonoBehaviour
         {
             scale += Time.deltaTime / _panelOpenDuration;
             _panelArea.localScale = Vector3.one * scale;
+            GetComponent<Image>().color = Color.Lerp(Color.clear, _openColor, scale);
             await Task.Yield();
         }
+        GetComponent<Button>().enabled = true;
         _panelArea.localScale = Vector3.one;
     }
 
@@ -37,11 +42,12 @@ public class PanelComponent : MonoBehaviour
         {
             scale -= Time.deltaTime / _panelOpenDuration;
             _panelArea.localScale = Vector3.one * scale;
+            GetComponent<Image>().color = Color.Lerp(Color.clear, _openColor, scale);
             await Task.Yield();
         }
         _panelArea.localScale = Vector3.zero;
 
-        GetComponent<Image>().enabled = false;
+        GetComponent<Button>().enabled = false;
         _panelArea.gameObject.SetActive(false);
     }
 }

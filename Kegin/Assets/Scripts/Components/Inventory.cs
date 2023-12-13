@@ -5,9 +5,11 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     // Private exposed variables
-    [SerializeField] private List<IngredientSO> _ingredients;
-    [SerializeField] private Dictionary<IngredientSO, int> _ingredientsQuantities;
     [SerializeField] private bool _stack = true;
+
+    // Private variables
+    private List<IngredientSO> _ingredients = new List<IngredientSO>();
+    private Dictionary<IngredientSO, int> _ingredientsQuantities = new Dictionary<IngredientSO, int>();
 
     // Properties
     public List<IngredientSO> Ingredients { get => _ingredients; private set => _ingredients = value; }
@@ -29,6 +31,8 @@ public class Inventory : MonoBehaviour
         {
             _ingredients.Add(ingredient);
         }
+
+        if(IngredientsQuantities[ingredient] == 1000) Debug.Log(ingredient + ": " + IngredientsQuantities[ingredient]);
     }
 
     public void RemoveIngredient(IngredientSO ingredient)

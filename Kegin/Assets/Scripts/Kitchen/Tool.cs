@@ -10,6 +10,4 @@ public class Tool : MonoBehaviour
     {
         _inventory = GetComponent<Inventory>();
     }
-
-
 }

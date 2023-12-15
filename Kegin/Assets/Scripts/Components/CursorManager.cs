@@ -147,6 +147,7 @@ public class CursorManager : MonoBehaviour
         _draggedIngredientSO = ingredientSO;
         _draggedInventoryOrigin = inventory;
         _draggedIngredientImage.Find("img_Ingredient").GetComponent<Image>().sprite = ingredientSO.Sprite;
+        _draggedIngredientImage.position = Input.GetTouch(0).position;
         _draggedIngredientImage.gameObject.SetActive(true);
     }
 }

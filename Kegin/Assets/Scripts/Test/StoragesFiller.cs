@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,19 +28,19 @@ public class StoragesFiller : MonoBehaviour
         {
             switch (ingredientSO.Storage)
             {
-                case StorageTypes.dry:
+                case StorageTypes.Dry:
                     for(int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
                     {
                         _locker.AddIngredient(ingredientSO);
                     }
                     break;
-                case StorageTypes.cold:
+                case StorageTypes.Cold:
                     for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
                     {
                         _fridge.AddIngredient(ingredientSO);
                     }
                     break;
-                case StorageTypes.shelf:
+                case StorageTypes.Shelf:
                     for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
                     {
                         _shelves.AddIngredient(ingredientSO);

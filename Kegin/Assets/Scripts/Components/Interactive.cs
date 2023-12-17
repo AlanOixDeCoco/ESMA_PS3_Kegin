@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour
+public class Interactive : MonoBehaviour
 {
     [SerializeField] private bool _interactable = true;
 

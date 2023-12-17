@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum ToolTypes
 {
-    pan,
-    pot,
-    oven
+    Pan,
+    Pot,
+    Oven
 }
 
 [CreateAssetMenu(fileName = "preparation_", menuName = "Ingredient/Preparation")]

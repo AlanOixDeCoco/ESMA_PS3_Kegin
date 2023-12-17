@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PanelComponent : MonoBehaviour
 {
-    public const float _panelOpenDuration = .2f;
+    public const float PanelOpenDuration = .2f;
 
     [SerializeField] private Transform _panelArea;
 
@@ -24,9 +21,9 @@ public class PanelComponent : MonoBehaviour
         _panelArea.gameObject.SetActive(true);
 
         float scale = 0;
-        while (scale + Time.deltaTime / _panelOpenDuration < 1)
+        while (scale + Time.deltaTime / PanelOpenDuration < 1)
         {
-            scale += Time.deltaTime / _panelOpenDuration;
+            scale += Time.deltaTime / PanelOpenDuration;
             _panelArea.localScale = Vector3.one * scale;
             GetComponent<Image>().color = Color.Lerp(Color.clear, _openColor, scale);
             await Task.Yield();
@@ -38,9 +35,9 @@ public class PanelComponent : MonoBehaviour
     public async Task ClosePanel()
     {
         float scale = 1;
-        while (scale - Time.deltaTime / _panelOpenDuration > 0)
+        while (scale - Time.deltaTime / PanelOpenDuration > 0)
         {
-            scale -= Time.deltaTime / _panelOpenDuration;
+            scale -= Time.deltaTime / PanelOpenDuration;
             _panelArea.localScale = Vector3.one * scale;
             GetComponent<Image>().color = Color.Lerp(Color.clear, _openColor, scale);
             await Task.Yield();

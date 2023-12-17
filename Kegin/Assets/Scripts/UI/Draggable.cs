@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -13,7 +12,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private IngredientSO _ingredientSO;
 
-    private bool _isPointerDown = false;
+    private bool _isPointerDown;
 
     public void OnPointerDown(PointerEventData eventData)
     {

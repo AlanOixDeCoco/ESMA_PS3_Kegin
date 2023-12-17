@@ -1,13 +1,17 @@
+using ScriptableObjects.Ingredients;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+namespace Managers
 {
-    [Header("Inventory UI")]
-    [SerializeField] private InventoryUI _inventoryUI;
-    [SerializeField] private IngredientSO[] _ingredientsSOs;
-
-    public void Setup()
+    public class UIManager : MonoBehaviour
     {
-        _inventoryUI.Setup(_ingredientsSOs);
+        [Header("Inventory UI")]
+        [SerializeField] private InventoryUI _inventoryUI;
+        [SerializeField] private IngredientSO[] _ingredientsSOs;
+
+        public void Setup()
+        {
+            _inventoryUI.Setup(_ingredientsSOs);
+        }
     }
 }

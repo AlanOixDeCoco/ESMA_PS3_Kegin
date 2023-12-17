@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ScriptableObjects.Ingredients;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -8,14 +9,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] private bool _stack = true;
 
     // Private variables
-    private List<IngredientSO> _ingredientsSOs = new List<IngredientSO>();
-    private Dictionary<IngredientSO, int> _ingredientsQuantities = new Dictionary<IngredientSO, int>();
+    private readonly List<IngredientSO> _ingredientsSOs = new();
+    private readonly Dictionary<IngredientSO, int> _ingredientsQuantities = new();
 
     // Properties
-    public List<IngredientSO> Ingredients { get => _ingredientsSOs; private set => _ingredientsSOs = value; }
-    public Dictionary<IngredientSO, int> IngredientsQuantities { get => _ingredientsQuantities; private set => _ingredientsQuantities = value; }
-    public bool Stack { get => _stack; private set => _stack = value; }
-    public string Name { get => _name; }
+    public List<IngredientSO> Ingredients => _ingredientsSOs;
+    public Dictionary<IngredientSO, int> IngredientsQuantities => _ingredientsQuantities;
+    public bool Stack => _stack;
+    public string Name => _name;
 
     // Methods
     public bool AddIngredient(IngredientSO ingredientSO)

@@ -1,10 +1,15 @@
 using System.Collections.Generic;
+using ScriptableObjects.Ingredients;
+using ScriptableObjects.Preparations;
 
-public class PlayerSave
+namespace Save
 {
-    // List of ingredients (not sorted by storage type)
-    public Dictionary<IngredientSO, int> Ingredients;
+    public class PlayerSave
+    {
+        // List of inventory ingredients (not sorted by storage type)
+        public Dictionary<IngredientSO, int> InventoryIngredients;
 
-    // List of unlocked preparations
-    public List<PreparationSO> Preparations;
+        // List of discovered preparations
+        public List<PreparationSO> DiscoveredPreparations;
+    }
 }

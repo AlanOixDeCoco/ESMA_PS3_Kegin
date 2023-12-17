@@ -1,4 +1,6 @@
+using ScriptableObjects.Ingredients;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public enum CursorStates
@@ -11,7 +13,7 @@ public enum CursorStates
 public class CursorManager : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
-    [SerializeField] private RectTransform _draggedIngredientImage;
+    [FormerlySerializedAs("_draggedIngredientImage")] [SerializeField] private RectTransform _draggedIngredientRectTransform;
     [SerializeField] private Inventory _dryInventory, _shelvesInventory, _fridgeInventory;
 
     private CursorStates _cursorState = CursorStates.Interact;
@@ -19,6 +21,12 @@ public class CursorManager : MonoBehaviour
     private Inventory _draggedInventoryOrigin;
     private Droppable _droppable;
     private bool _canDrop;
+    private Draggable _draggedIngredientDraggable;
+
+    private void Start()
+    {
+        _draggedIngredientDraggable = _draggedIngredientRectTransform.GetComponent<Draggable>();
+    }
 
     private void Update()
     {
@@ -33,7 +41,6 @@ public class CursorManager : MonoBehaviour
                 Drag();
                 break;
             default:
-                Debug.LogWarning("Unknown cursor type!");
                 break;
         }
     }
@@ -48,9 +55,6 @@ public class CursorManager : MonoBehaviour
         var ray = _camera.ScreenPointToRay(touchPos);
         
         if (!Physics.Raycast(ray, out var hit)) return;
-        
-        var hitPoint = hit.point;
-        transform.position = hitPoint;
 
         if(hit.collider.TryGetComponent<Interactive>(out var interactiveComponent))
             interactiveComponent.Interact();
@@ -58,7 +62,7 @@ public class CursorManager : MonoBehaviour
 
     private void Drag()
     {
-        // Check if a touch is being registered
+        // If no touch is registered (we were registering one in the previous state)
         if (Input.touchCount == 0)
         {
             // drop item if it can be dropped
@@ -66,18 +70,13 @@ public class CursorManager : MonoBehaviour
             else
             {
                 _draggedInventoryOrigin.RemoveIngredient(_draggedIngredientSO);
-                switch (_draggedIngredientSO.Storage)
+                _draggedInventoryOrigin = _draggedIngredientSO.Storage switch
                 {
-                    case StorageTypes.Dry:
-                        _draggedInventoryOrigin = _dryInventory;
-                        break;
-                    case StorageTypes.Shelf:
-                        _draggedInventoryOrigin = _shelvesInventory;
-                        break;
-                    case StorageTypes.Cold:
-                        _draggedInventoryOrigin = _fridgeInventory;
-                        break;
-                }
+                    StorageTypes.Dry => _dryInventory,
+                    StorageTypes.Shelf => _shelvesInventory,
+                    StorageTypes.Cold => _fridgeInventory,
+                    _ => _draggedInventoryOrigin
+                };
                 _draggedInventoryOrigin.AddIngredient(_draggedIngredientSO);
             }
 
@@ -86,26 +85,28 @@ public class CursorManager : MonoBehaviour
         }
 
         var touchPos = Input.GetTouch(0).position;
+        _draggedIngredientRectTransform.position = touchPos;
 
-        Ray ray = _camera.ScreenPointToRay(touchPos);
-        if (Physics.Raycast(ray, out var hit))
+        var ray = _camera.ScreenPointToRay(touchPos);
+        if (!Physics.Raycast(ray, out var hit))
         {
-            Vector3 hitPoint = hit.point;
-            transform.position = hitPoint;
-
-            _canDrop = hit.collider.TryGetComponent<Droppable>(out _droppable);
+            _canDrop = false;
         }
-
-        _draggedIngredientImage.position = touchPos;
-
-        _droppable.TryGetComponent<Inventory>(out var inventoryComponent);
-        _canDrop = _canDrop && !inventoryComponent.Ingredients.Contains(_draggedIngredientSO);
-        _draggedIngredientImage.GetComponent<Draggable>().SetDroppableHint(_canDrop);
+        else
+        {
+            _canDrop = hit.collider.TryGetComponent<Droppable>(out _droppable);
+            if (_canDrop)
+            {
+                _droppable.TryGetComponent<Inventory>(out var inventoryComponent);
+                _canDrop = !inventoryComponent.Ingredients.Contains(_draggedIngredientSO);
+            }
+        }
+        _draggedIngredientDraggable.SetDroppableHint(_canDrop);
     }
 
     public void SetInteractState()
     {
-        _draggedIngredientImage.gameObject.SetActive(false);
+        _draggedIngredientRectTransform.gameObject.SetActive(false);
         _cursorState = CursorStates.Interact;
     }
     public void SetUIState()
@@ -117,8 +118,8 @@ public class CursorManager : MonoBehaviour
         _cursorState = CursorStates.Drag;
         _draggedIngredientSO = ingredientSO;
         _draggedInventoryOrigin = inventory;
-        _draggedIngredientImage.Find("img_Ingredient").GetComponent<Image>().sprite = ingredientSO.Sprite;
-        _draggedIngredientImage.position = Input.GetTouch(0).position;
-        _draggedIngredientImage.gameObject.SetActive(true);
+        _draggedIngredientRectTransform.Find("img_Ingredient").GetComponent<Image>().sprite = ingredientSO.Sprite;
+        _draggedIngredientRectTransform.position = Input.GetTouch(0).position;
+        _draggedIngredientRectTransform.gameObject.SetActive(true);
     }
 }

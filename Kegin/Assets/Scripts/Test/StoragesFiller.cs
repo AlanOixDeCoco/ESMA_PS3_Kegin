@@ -1,56 +1,62 @@
 using System.Collections.Generic;
+using Managers;
+using ScriptableObjects.Ingredients;
 using UnityEngine;
 
-public class StoragesFiller : MonoBehaviour
+namespace Test
 {
-    [SerializeField] private Inventory _shelves, _fridge, _locker;
-    [SerializeField] private UIManager _uiManager;
-
-    [SerializeField] private List<IngredientSO> _ingredientsSOs = new List<IngredientSO>();
-    [SerializeField] private List<int> _ingredientsQuantities = new List<int>();
-
-    private void OnValidate()
+    public class StoragesFiller : MonoBehaviour
     {
-        while(_ingredientsQuantities.Count < _ingredientsSOs.Count)
-        {
-            if (_ingredientsQuantities.Count > 0) _ingredientsQuantities.Add(_ingredientsQuantities[_ingredientsQuantities.Count - 1]);
-            else _ingredientsQuantities.Add(1);
-        }
-        while (_ingredientsQuantities.Count > _ingredientsSOs.Count)
-        {
-            _ingredientsQuantities.RemoveAt(_ingredientsQuantities.Count - 1);
-        }
-    }
+        [SerializeField] private Inventory _shelves, _fridge, _locker;
+        [SerializeField] private UIManager _uiManager;
 
-    private void Start()
-    {
-        foreach (var ingredientSO in _ingredientsSOs)
+        [SerializeField] private List<IngredientSO> _ingredientsSOs = new();
+        [SerializeField] private List<int> _ingredientsQuantities = new();
+
+        private void OnValidate()
         {
-            switch (ingredientSO.Storage)
+            while(_ingredientsQuantities.Count < _ingredientsSOs.Count)
             {
-                case StorageTypes.Dry:
-                    for(int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
-                    {
-                        _locker.AddIngredient(ingredientSO);
-                    }
-                    break;
-                case StorageTypes.Cold:
-                    for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
-                    {
-                        _fridge.AddIngredient(ingredientSO);
-                    }
-                    break;
-                case StorageTypes.Shelf:
-                    for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
-                    {
-                        _shelves.AddIngredient(ingredientSO);
-                    }
-                    break;
-                default:
-                    break;
+                _ingredientsQuantities.Add(_ingredientsQuantities.Count > 0
+                    ? _ingredientsQuantities[^1]
+                    : 1);
+            }
+            while (_ingredientsQuantities.Count > _ingredientsSOs.Count)
+            {
+                _ingredientsQuantities.RemoveAt(_ingredientsQuantities.Count - 1);
             }
         }
 
-        _uiManager.Setup();
+        private void Start()
+        {
+            foreach (var ingredientSO in _ingredientsSOs)
+            {
+                switch (ingredientSO.Storage)
+                {
+                    case StorageTypes.Dry:
+                        for(int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
+                        {
+                            _locker.AddIngredient(ingredientSO);
+                        }
+                        break;
+                    case StorageTypes.Cold:
+                        for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
+                        {
+                            _fridge.AddIngredient(ingredientSO);
+                        }
+                        break;
+                    case StorageTypes.Shelf:
+                        for (int i = 0; i < _ingredientsQuantities[_ingredientsSOs.IndexOf(ingredientSO)]; i++)
+                        {
+                            _shelves.AddIngredient(ingredientSO);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            _uiManager.Setup();
+        }
     }
 }

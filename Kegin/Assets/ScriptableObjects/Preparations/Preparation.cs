@@ -1,20 +1,24 @@
+using ScriptableObjects.Ingredients;
 using UnityEngine;
 
-public enum ToolTypes
+namespace ScriptableObjects.Preparations
 {
-    Pan,
-    Pot,
-    Oven
-}
+    public enum ToolTypes
+    {
+        Pan,
+        Pot,
+        Oven
+    }
 
-[CreateAssetMenu(fileName = "preparation_", menuName = "Ingredient/Preparation")]
-public class PreparationSO : ScriptableObject
-{
-    [SerializeField] private ToolTypes _tool;
-    [SerializeField] private IngredientSO[] _ingredientsSOs;
-    [SerializeField] private IngredientSO _result;
+    [CreateAssetMenu(fileName = "preparation_", menuName = "Ingredient/Preparation")]
+    public class PreparationSO : ScriptableObject
+    {
+        [SerializeField] private ToolTypes _tool;
+        [SerializeField] private IngredientSO[] _ingredientsSOs;
+        [SerializeField] private IngredientSO _result;
 
-    public ToolTypes Tool { get => _tool; }
-    public IngredientSO[] Ingredients { get => _ingredientsSOs; }
-    public IngredientSO Result { get => _result; }
+        public ToolTypes Tool => _tool;
+        public IngredientSO[] Ingredients => _ingredientsSOs;
+        public IngredientSO Result => _result;
+    }
 }

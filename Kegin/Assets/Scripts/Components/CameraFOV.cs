@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CameraFOV : MonoBehaviour
 {
-    [SerializeField] private float _hfov = 50f;
+    [FormerlySerializedAs("_hfov")] [SerializeField] private float _hFOV = 50f;
 
     private void Start()
     {
-        GetComponent<Camera>().fieldOfView = Camera.HorizontalToVerticalFieldOfView(_hfov, GetComponent<Camera>().aspect);
+        GetComponent<Camera>().fieldOfView = Camera.HorizontalToVerticalFieldOfView(_hFOV, GetComponent<Camera>().aspect);
     }
 }

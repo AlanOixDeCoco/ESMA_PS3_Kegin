@@ -1,25 +1,30 @@
 using System.Collections.Generic;
+using ScriptableObjects.Ingredients;
+using ScriptableObjects.Preparations;
 using UnityEngine;
 
-public class CookingManager : MonoBehaviour
+namespace Managers
 {
-    [SerializeField] private PreparationSO[] _preparationsSOs;
-
-    private Dictionary<IngredientSO, List<PreparationSO>> _ingredientsRelations = new Dictionary<IngredientSO, List<PreparationSO>>();
-
-    private void Start()
+    public class CookingManager : MonoBehaviour
     {
-        foreach (var preparationSO in _preparationsSOs)
+        [SerializeField] private PreparationSO[] _preparationsSOs;
+
+        private readonly Dictionary<IngredientSO, List<PreparationSO>> _ingredientsRelations = new();
+
+        private void Start()
         {
-            foreach(var ingredientSO in preparationSO.Ingredients)
+            foreach (var preparationSO in _preparationsSOs)
             {
-                // If this ingredient doesn't already has this entry we create the list first
-                if (!_ingredientsRelations.ContainsKey(ingredientSO)) _ingredientsRelations.Add(ingredientSO, new List<PreparationSO>());
+                foreach(var ingredientSO in preparationSO.Ingredients)
+                {
+                    // If this ingredient doesn't already has this entry we create the list first
+                    if (!_ingredientsRelations.ContainsKey(ingredientSO)) _ingredientsRelations.Add(ingredientSO, new List<PreparationSO>());
                     
-                // Then in both cases we add the preparation
-                _ingredientsRelations[ingredientSO].Add(preparationSO);
+                    // Then in both cases we add the preparation
+                    _ingredientsRelations[ingredientSO].Add(preparationSO);
+                }
             }
+            Debug.Log(_ingredientsRelations.Count.ToString());
         }
-        Debug.Log(_ingredientsRelations.Count);
     }
 }

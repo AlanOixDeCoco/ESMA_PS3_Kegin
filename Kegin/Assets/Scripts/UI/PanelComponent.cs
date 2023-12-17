@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class PanelComponent : MonoBehaviour
 {
-    public const float PanelOpenDuration = .2f;
+    private const float PanelOpenDuration = .2f;
 
     [SerializeField] private Transform _panelArea;
 
     [SerializeField] private Color _openColor;
-
+    
     private void Awake()
     {
         if (_panelArea == null) _panelArea = transform.GetChild(0);
@@ -19,7 +19,7 @@ public class PanelComponent : MonoBehaviour
     public async void OpenPanel()
     {
         _panelArea.gameObject.SetActive(true);
-
+        
         float scale = 0;
         while (scale + Time.deltaTime / PanelOpenDuration < 1)
         {

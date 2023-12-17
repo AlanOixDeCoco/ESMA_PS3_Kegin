@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class Tool : MonoBehaviour
+namespace Kitchen
 {
-    private Inventory _inventory;
-
-    private void Start()
+    public class Tool : MonoBehaviour
     {
-        _inventory = GetComponent<Inventory>();
+        private Inventory _inventory;
+
+        private void Start()
+        {
+            _inventory = GetComponent<Inventory>();
+        }
     }
 }

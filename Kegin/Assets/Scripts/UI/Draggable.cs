@@ -1,4 +1,5 @@
 using System.Collections;
+using ScriptableObjects.Ingredients;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -11,8 +12,13 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public UnityEvent<IngredientSO> _onBeginDrag;
 
     private IngredientSO _ingredientSO;
-
+    private Image _draggableImage;
     private bool _isPointerDown;
+
+    private void Start()
+    {
+        _draggableImage = GetComponent<Image>();
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -25,7 +31,7 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         _isPointerDown = false;
     }
 
-    public IEnumerator ConfirmDrag()
+    private IEnumerator ConfirmDrag()
     {
         yield return new WaitForSeconds(_dragConfirmDelay);
         if(_isPointerDown)
@@ -41,6 +47,6 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void SetDroppableHint(bool droppable)
     {
-        GetComponent<Image>().color = droppable ? Color.green : Color.red;
+        _draggableImage.color = droppable ? Color.green : Color.red;
     }
 }

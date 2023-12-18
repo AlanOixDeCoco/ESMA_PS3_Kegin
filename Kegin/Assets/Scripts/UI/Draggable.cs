@@ -7,18 +7,13 @@ using UnityEngine.UI;
 
 public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
+    [SerializeField] private Image _draggableImage;
     [SerializeField] private float _dragConfirmDelay = .5f;
 
     public UnityEvent<IngredientSO> _onBeginDrag;
 
     private IngredientSO _ingredientSO;
-    private Image _draggableImage;
     private bool _isPointerDown;
-
-    private void Start()
-    {
-        _draggableImage = GetComponent<Image>();
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -47,6 +42,6 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void SetDroppableHint(bool droppable)
     {
-        _draggableImage.color = droppable ? Color.green : Color.red;
+        _draggableImage.color = droppable ? Color.white : Color.red;
     }
 }

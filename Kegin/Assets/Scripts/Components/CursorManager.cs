@@ -40,8 +40,6 @@ public class CursorManager : MonoBehaviour
             case CursorStates.Drag:
                 Drag();
                 break;
-            default:
-                break;
         }
     }
 
@@ -94,7 +92,7 @@ public class CursorManager : MonoBehaviour
         }
         else
         {
-            _canDrop = hit.collider.TryGetComponent<Droppable>(out _droppable);
+            _canDrop = hit.collider.TryGetComponent(out _droppable);
             if (_canDrop)
             {
                 _droppable.TryGetComponent<Inventory>(out var inventoryComponent);

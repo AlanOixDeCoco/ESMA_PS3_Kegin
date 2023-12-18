@@ -54,4 +54,10 @@ public class Inventory : MonoBehaviour
             _ingredientsSOs.Remove(ingredientSO);
         }
     }
+
+    public void ClearInventory()
+    {
+        _ingredientsSOs.Clear();
+        _ingredientsQuantities.Clear();
+    }
 }

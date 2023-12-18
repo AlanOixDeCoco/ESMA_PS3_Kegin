@@ -7,8 +7,14 @@ public class Interactive : MonoBehaviour
 
     [SerializeField] private UnityEvent<Transform> _onInteract;
 
+    public bool Interactable
+    {
+        get => _interactable;
+        set => _interactable = value;
+    }
+
     public void Interact()
     {
-        if (_interactable) _onInteract.Invoke(transform);
+        if (Interactable) _onInteract.Invoke(transform);
     }
 }

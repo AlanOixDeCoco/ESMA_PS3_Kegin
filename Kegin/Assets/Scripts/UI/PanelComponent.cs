@@ -19,7 +19,8 @@ public class PanelComponent : MonoBehaviour
     public async void OpenPanel()
     {
         _panelArea.gameObject.SetActive(true);
-        
+        GetComponent<Button>().enabled = false;
+        GetComponent<Image>().enabled = true;
         float scale = 0;
         while (scale + Time.deltaTime / PanelOpenDuration < 1)
         {
@@ -44,7 +45,7 @@ public class PanelComponent : MonoBehaviour
         }
         _panelArea.localScale = Vector3.zero;
 
-        GetComponent<Button>().enabled = false;
+        GetComponent<Image>().enabled = false;
         _panelArea.gameObject.SetActive(false);
     }
 }

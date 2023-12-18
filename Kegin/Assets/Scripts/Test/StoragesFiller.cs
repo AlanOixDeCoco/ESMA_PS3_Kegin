@@ -51,11 +51,8 @@ namespace Test
                             _shelves.AddIngredient(ingredientSO);
                         }
                         break;
-                    default:
-                        break;
                 }
             }
-
             _uiManager.Setup();
         }
     }

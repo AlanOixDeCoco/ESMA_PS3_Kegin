@@ -1,5 +1,6 @@
 using ScriptableObjects.Ingredients;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ScriptableObjects.Preparations
 {
@@ -15,10 +16,10 @@ namespace ScriptableObjects.Preparations
     {
         [SerializeField] private ToolTypes _tool;
         [SerializeField] private IngredientSO[] _ingredientsSOs;
-        [SerializeField] private IngredientSO _result;
+        [FormerlySerializedAs("_result")] [SerializeField] private IngredientSO _resultIngredientSO;
 
         public ToolTypes Tool => _tool;
         public IngredientSO[] Ingredients => _ingredientsSOs;
-        public IngredientSO Result => _result;
+        public IngredientSO ResultIngredientSO => _resultIngredientSO;
     }
 }

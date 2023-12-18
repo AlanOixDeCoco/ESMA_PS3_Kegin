@@ -8,6 +8,7 @@ namespace Managers
     public class CookingManager : MonoBehaviour
     {
         [SerializeField] private PreparationSO[] _preparationsSOs;
+        [SerializeField] private IngredientSO _badResultIngredientSO;
 
         private readonly Dictionary<IngredientSO, List<PreparationSO>> _ingredientsRelations = new();
 
@@ -24,7 +25,49 @@ namespace Managers
                     _ingredientsRelations[ingredientSO].Add(preparationSO);
                 }
             }
-            Debug.Log(_ingredientsRelations.Count.ToString());
+        }
+
+        private bool TryGetPreparation(in List<IngredientSO> ingredientSOs, out PreparationSO preparationSO)
+        {
+            foreach (var ingredient in ingredientSOs)
+            {
+                if(!_ingredientsRelations.ContainsKey(ingredient)) continue;
+                foreach (var preparation in _ingredientsRelations[ingredient])
+                {
+                    // If the number of ingredients does not match --> Skip
+                    if(preparation.Ingredients.Length != ingredientSOs.Count) continue;
+                    
+                    // If the ingredients do not match --> Skip
+
+                    bool ingredientsMatch = false;
+                    foreach (var preparationIngredient in preparation.Ingredients)
+                    {
+                        ingredientsMatch = ingredientSOs.Contains(preparationIngredient);
+                    }
+                    if (!ingredientsMatch) continue;
+                    
+                    // If we haven't skip yet the prep is possible (same num of ingredients & same ingredients)
+                    preparationSO = preparation;
+                    return true;
+                }
+            }
+            // We didn't find a possible preparation
+            preparationSO = null;
+            return false;
+        }
+
+        public IngredientSO GetPreparationResult(in List<IngredientSO> ingredientSOs)
+        {
+            if (TryGetPreparation(ingredientSOs, out var preparationSO))
+            {
+                // --> Do preparation unlocking logic here
+                
+                // Then return the preparaion result
+                return preparationSO.ResultIngredientSO;
+            }
+
+            // If there were no preparation found
+            return _badResultIngredientSO;
         }
     }
 }

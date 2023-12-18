@@ -6,12 +6,15 @@ namespace Managers
     public class UIManager : MonoBehaviour
     {
         [Header("Inventory UI")]
-        [SerializeField] private InventoryUI _inventoryUI;
+        [SerializeField] private InventoryUI[] _inventoryUIs;
         [SerializeField] private IngredientSO[] _ingredientsSOs;
 
         public void Setup()
         {
-            _inventoryUI.Setup(_ingredientsSOs);
+            foreach (var inventoryUI in _inventoryUIs)
+            {
+                inventoryUI.Setup(_ingredientsSOs);
+            }
         }
     }
 }

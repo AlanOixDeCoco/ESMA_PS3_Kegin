@@ -1,5 +1,7 @@
 using ScriptableObjects.Ingredients;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -16,6 +18,8 @@ public class CursorManager : MonoBehaviour
     [FormerlySerializedAs("_draggedIngredientImage")] [SerializeField] private RectTransform _draggedIngredientRectTransform;
     [SerializeField] private Inventory _dryInventory, _shelvesInventory, _fridgeInventory;
 
+    [SerializeField] private UnityEvent _onInteractState, _onUIState, _onDragState;
+    
     private CursorStates _cursorState = CursorStates.Interact;
     private IngredientSO _draggedIngredientSO;
     private Inventory _draggedInventoryOrigin;
@@ -97,6 +101,8 @@ public class CursorManager : MonoBehaviour
             {
                 _droppable.TryGetComponent<Inventory>(out var inventoryComponent);
                 _canDrop = !inventoryComponent.Ingredients.Contains(_draggedIngredientSO);
+                _droppable.TryGetComponent<Interactive>(out var interactiveComponent);
+                _canDrop  &= interactiveComponent.Interactable;
             }
         }
         _draggedIngredientDraggable.SetDroppableHint(_canDrop);
@@ -106,18 +112,23 @@ public class CursorManager : MonoBehaviour
     {
         _draggedIngredientRectTransform.gameObject.SetActive(false);
         _cursorState = CursorStates.Interact;
+        _onInteractState.Invoke();
     }
     public void SetUIState()
     {
         _cursorState = CursorStates.UI;
+        _onUIState.Invoke();
     }
     public void SetDragState(IngredientSO ingredientSO, Inventory inventory)
     {
         _cursorState = CursorStates.Drag;
         _draggedIngredientSO = ingredientSO;
         _draggedInventoryOrigin = inventory;
+        _draggedIngredientDraggable._onBeginDrag.Invoke(ingredientSO);
         _draggedIngredientRectTransform.Find("img_Ingredient").GetComponent<Image>().sprite = ingredientSO.Sprite;
+        _draggedIngredientRectTransform.Find("text_Name").GetComponent<TextMeshProUGUI>().text = ingredientSO.Name;
         _draggedIngredientRectTransform.position = Input.GetTouch(0).position;
         _draggedIngredientRectTransform.gameObject.SetActive(true);
+        _onDragState.Invoke();
     }
 }

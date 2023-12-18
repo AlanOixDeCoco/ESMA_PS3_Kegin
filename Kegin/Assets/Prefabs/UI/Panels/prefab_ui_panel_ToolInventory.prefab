@@ -1238,6 +1238,21 @@ MonoBehaviour:
   _ingredientPrefab: {fileID: 3898143936350821610, guid: 1bbca22253c20ed40a5e2081449f0b1f,
     type: 3}
   _cursor: {fileID: 0}
+  _beforeInventoryOpen:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6965514430812170120}
+        m_TargetAssemblyTypeName: ToolUI, Assembly-CSharp
+        m_MethodName: CheckCookAbility
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6965514430812170120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1250,6 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb38a4a4b8904445953f5006e6371ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cookButton: {fileID: 4425743710357365630}
 --- !u!224 &5221281554837000446 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3837938105516261382, guid: 5e996ea6e92edca4f956a2b79a281f61,

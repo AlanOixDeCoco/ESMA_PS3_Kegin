@@ -9,24 +9,28 @@ public class PanelComponent : MonoBehaviour
     [SerializeField] private Transform _panelArea;
 
     [SerializeField] private Color _openColor;
+
+    private Image _backgroundImage;
     
     private void Awake()
     {
         if (_panelArea == null) _panelArea = transform.GetChild(0);
-        GetComponent<Image>().color = Color.clear;
+        
+        _backgroundImage = GetComponent<Image>();
+        _backgroundImage.color = Color.clear;
     }
 
     public async void OpenPanel()
     {
         _panelArea.gameObject.SetActive(true);
         GetComponent<Button>().enabled = false;
-        GetComponent<Image>().enabled = true;
+        _backgroundImage.enabled = true;
         float scale = 0;
         while (scale + Time.deltaTime / PanelOpenDuration < 1)
         {
             scale += Time.deltaTime / PanelOpenDuration;
             _panelArea.localScale = Vector3.one * scale;
-            GetComponent<Image>().color = Color.Lerp(Color.clear, _openColor, scale);
+            _backgroundImage.color = Color.Lerp(Color.clear, _openColor, scale);
             await Task.Yield();
         }
         GetComponent<Button>().enabled = true;
@@ -40,12 +44,12 @@ public class PanelComponent : MonoBehaviour
         {
             scale -= Time.deltaTime / PanelOpenDuration;
             _panelArea.localScale = Vector3.one * scale;
-            GetComponent<Image>().color = Color.Lerp(Color.clear, _openColor, scale);
+            _backgroundImage.color = Color.Lerp(Color.clear, _openColor, scale);
             await Task.Yield();
         }
         _panelArea.localScale = Vector3.zero;
 
-        GetComponent<Image>().enabled = false;
+        _backgroundImage.enabled = false;
         _panelArea.gameObject.SetActive(false);
     }
 }

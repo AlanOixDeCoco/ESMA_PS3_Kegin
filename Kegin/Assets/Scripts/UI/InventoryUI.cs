@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using ScriptableObjects.Ingredients;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(PanelComponent))]
@@ -11,6 +13,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private GameObject _ingredientPrefab;
     [SerializeField] private CursorManager _cursor;
 
+    [SerializeField] private UnityEvent _beforeInventoryOpen;
+
     private Inventory _openedInventory;
 
     public Inventory OpenedInventory => _openedInventory;
@@ -19,6 +23,8 @@ public class InventoryUI : MonoBehaviour
     {
         _openedInventory = inventoryTransform.GetComponent<Inventory>();
         _inventoryTitle.text = OpenedInventory.Name;
+        
+        _beforeInventoryOpen.Invoke();
 
         foreach (var ingredient in OpenedInventory.Ingredients)
         {
@@ -69,7 +75,8 @@ public class InventoryUI : MonoBehaviour
             var ingredientBtn = Instantiate(_ingredientPrefab, _ingredientBtnsContainer).transform;
             ingredientBtn.name = ingredientSO.Name;
             ingredientBtn.Find("img_Ingredient").GetComponent<Image>().sprite = ingredientSO.Sprite;
-
+            ingredientBtn.Find("text_Name").GetComponent<TextMeshProUGUI>().text = ingredientSO.Name;
+            
             var draggable = ingredientBtn.GetComponent<Draggable>();
             draggable.Setup(ingredientSO);
 

@@ -1,0 +1,12 @@
+Liste des tâches :
+==================
+⬤ Drag & Drop des ingrédients dans les différents ustensiles - Done
+⬤ Création des ingrédients de base à l’aide de ScriptableObjects - Done
+⬤ Préparation, création de nouveaux ingrédients via les mécaniques de drag & drop et de cuisson - Done
+⬤ Sauvegarde des recettes découvertes - Done
+⬤ Affichage des recettes découvertes (in-game) - 
+⬤ Menu principal
+⬤ Affichage des recettes réelles dans le menu principal
+⬤ Gestion de la monnaie
+⬤ Vente des préparations au comptoir
+⬤ Commandes depuis le comptoir

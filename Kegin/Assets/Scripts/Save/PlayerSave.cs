@@ -7,9 +7,9 @@ namespace Save
     public class PlayerSave
     {
         // List of inventory ingredients (not sorted by storage type)
-        public Dictionary<IngredientSO, int> InventoryIngredients;
+        public Dictionary<IngredientSO, int> InventoryIngredients = new();
 
         // List of discovered preparations
-        public List<PreparationSO> DiscoveredPreparations;
+        public List<PreparationSO> UnlockedPreparationsSOs = new();
     }
 }

@@ -1,7 +1,8 @@
 using System.Collections;
 using Managers;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Kitchen
 {
@@ -11,6 +12,8 @@ namespace Kitchen
         
         [SerializeField] private CookingManager _cookingManager;
         [SerializeField] private ToolWorldUI _toolWorldUI;
+
+        [SerializeField] private UnityEvent _onCookingBegin, _onCookingEnd;
         
         private Inventory _inventory;
         private Interactive _interactiveComponent;
@@ -33,6 +36,8 @@ namespace Kitchen
             _toolWorldUI.Show(true);
             _toolWorldUI.SetProgress(0f);
             
+            _onCookingBegin.Invoke();
+            
             // Deactivate the interactive component
             _interactiveComponent.Interactable = false;
             
@@ -52,6 +57,8 @@ namespace Kitchen
                 
                 yield return null;
             }
+            
+            _onCookingEnd.Invoke();
             
             _toolWorldUI.Show(false);
             

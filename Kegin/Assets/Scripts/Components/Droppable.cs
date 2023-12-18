@@ -9,16 +9,14 @@ public class Droppable : MonoBehaviour
 
     private Inventory _inventory;
 
-    public Inventory Inventory { get => _inventory; set => _inventory = value; }
-
     private void Start()
     {
-        Inventory = GetComponent<Inventory>();
+        _inventory = GetComponent<Inventory>();
     }
 
     public void Drop(IngredientSO ingredientSO, Inventory originInventory)
     {
-        if (Inventory.AddIngredient(ingredientSO))
+        if (_inventory.AddIngredient(ingredientSO))
         {
             originInventory.RemoveIngredient(ingredientSO);
             _onDropConfirmed.Invoke(transform);

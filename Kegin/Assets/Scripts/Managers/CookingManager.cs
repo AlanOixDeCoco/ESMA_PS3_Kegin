@@ -12,8 +12,12 @@ namespace Managers
 
         private readonly Dictionary<IngredientSO, List<PreparationSO>> _ingredientsRelations = new();
 
+        private SaveManager _saveManager;
+        
         private void Start()
         {
+            _saveManager = GetComponent<SaveManager>();
+            
             foreach (var preparationSO in _preparationsSOs)
             {
                 foreach(var ingredientSO in preparationSO.Ingredients)
@@ -60,7 +64,13 @@ namespace Managers
         {
             if (TryGetPreparation(ingredientSOs, out var preparationSO))
             {
-                // --> Do preparation unlocking logic here
+                // --> If already unlocked
+                if(_saveManager.PlayerSave.UnlockedPreparationsSOs.Contains(preparationSO)) 
+                    return preparationSO.ResultIngredientSO; // Then return the preparaion result immediately
+                
+                // --> If not unlocked already
+                _saveManager.PlayerSave.UnlockedPreparationsSOs.Add(preparationSO);
+                _saveManager.Save();
                 
                 // Then return the preparaion result
                 return preparationSO.ResultIngredientSO;

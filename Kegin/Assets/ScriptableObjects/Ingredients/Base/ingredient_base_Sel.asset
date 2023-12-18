@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ingredient_base_Sel
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 30e4ede93f8823f429de06c5f6bef8d6, type: 3}
-  _name: Sel
+  _name: "Sel de Gu\xE9rande"
   _storage: 2
   _saleable: 0

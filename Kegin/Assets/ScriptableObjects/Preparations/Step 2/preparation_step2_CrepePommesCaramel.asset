@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa971a158e9380e4ba9e9c206d70e6bf, type: 3}
+  m_Name: preparation_step2_CrepePommesCaramel
+  m_EditorClassIdentifier: 
+  _tool: 0
+  _ingredientsSOs:
+  - {fileID: 11400000, guid: baf71a9b86f161747bd0a16171b336ac, type: 2}
+  - {fileID: 11400000, guid: 7890058103f79d24eabaaeabc7a6f278, type: 2}
+  - {fileID: 11400000, guid: cea54e64afb900b41ace91c1f87a777d, type: 2}
+  _resultIngredientSO: {fileID: 11400000, guid: 99dc44e5372b60e4e94a32cc314c2541,
+    type: 2}

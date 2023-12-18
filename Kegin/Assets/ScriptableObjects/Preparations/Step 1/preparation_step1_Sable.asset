@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa971a158e9380e4ba9e9c206d70e6bf, type: 3}
+  m_Name: preparation_step1_Sable
+  m_EditorClassIdentifier: 
+  _tool: 0
+  _ingredientsSOs:
+  - {fileID: 11400000, guid: 43cab76e8e7ad4641a05671d6f1e6cf7, type: 2}
+  - {fileID: 11400000, guid: 6ee0cc38635ac0245ba9fa84d0a3b43f, type: 2}
+  - {fileID: 11400000, guid: db4c1a1bc2a4cc5498b2348a31400975, type: 2}
+  - {fileID: 11400000, guid: 80261efe45fac0246a092bb3f54db8b4, type: 2}
+  - {fileID: 11400000, guid: 3e53db2c1b89b4f438f0d31acef670ed, type: 2}
+  _resultIngredientSO: {fileID: 11400000, guid: a4cd0a0d89ad43646a9274fc4621ff16,
+    type: 2}

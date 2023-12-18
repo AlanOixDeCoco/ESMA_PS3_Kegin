@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa971a158e9380e4ba9e9c206d70e6bf, type: 3}
-  m_Name: preparation_step1_Galette
+  m_Name: preparation_step2_KigHaFarz
   m_EditorClassIdentifier: 
   _tool: 0
   _ingredientsSOs:
-  - {fileID: 11400000, guid: dbfe4340ccf8bb24db807a7275fe43fa, type: 2}
-  - {fileID: 11400000, guid: 43cab76e8e7ad4641a05671d6f1e6cf7, type: 2}
-  - {fileID: 11400000, guid: a685fdef7ed528646b5594525298085d, type: 2}
-  - {fileID: 11400000, guid: 67f9cc34d71686e43ae4180b6c84d0ac, type: 2}
-  _result: {fileID: 11400000, guid: 6307e800f16c6a6429c57bfb24022ac4, type: 2}
+  - {fileID: 11400000, guid: 149dd07fbcd7c3b40b452859227a86ad, type: 2}
+  - {fileID: 11400000, guid: 73fa49398bd874646a0819446c4657f5, type: 2}
+  _resultIngredientSO: {fileID: 11400000, guid: b711b6d7096dac9479cdcbc2e41ba0f4,
+    type: 2}

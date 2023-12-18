@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94e158ea87ca6f5498bd4d23d23a873f, type: 3}
-  m_Name: ingredient_base_Farine
+  m_Name: ingredient_base_FarineFroment
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 4ab67e6a68690f84eb54ad1dc2b31b5b, type: 3}
-  _name: Farine
+  _sprite: {fileID: 21300000, guid: 9220d35bb1054d640bd28cf9591f44be, type: 3}
+  _name: Farine de froment
   _storage: 1
   _saleable: 0

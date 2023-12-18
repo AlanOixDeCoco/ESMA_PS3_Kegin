@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa971a158e9380e4ba9e9c206d70e6bf, type: 3}
+  m_Name: preparation_step1_CocosPaimpol
+  m_EditorClassIdentifier: 
+  _tool: 0
+  _ingredientsSOs:
+  - {fileID: 11400000, guid: 419b65a20a6a35e44953a674fbc51f44, type: 2}
+  - {fileID: 11400000, guid: dbfe4340ccf8bb24db807a7275fe43fa, type: 2}
+  - {fileID: 11400000, guid: c53cc23bc3393554ea551bb4063159c9, type: 2}
+  - {fileID: 11400000, guid: ff6f137e5a0355044a60c445f69589f8, type: 2}
+  - {fileID: 11400000, guid: d32811cd457d0804eb364f03945fc8c9, type: 2}
+  - {fileID: 11400000, guid: 86c1cb2d3c48b8f43b2f12e5406bc1e6, type: 2}
+  _resultIngredientSO: {fileID: 11400000, guid: 4114218785e73334eac2fb374b356904,
+    type: 2}

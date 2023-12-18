@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e158ea87ca6f5498bd4d23d23a873f, type: 3}
   m_Name: ingredient_processed_GaletteCabillaud
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  _name: 
+  _sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _name: Galette au cabillaud de Concarneau
   _storage: 0
   _saleable: 1

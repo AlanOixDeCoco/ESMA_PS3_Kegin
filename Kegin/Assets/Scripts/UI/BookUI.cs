@@ -8,34 +8,25 @@ using UnityEngine.UI;
 public class BookUI : MonoBehaviour
 {
     [SerializeField] private SaveManager _saveManager;
-    [SerializeField] private BookWorldUI _bookWorldUI;
 
-    [SerializeField] private Image _resultImage;
+    [SerializeField] private Image _resultImage, _worldResultImage;
     [SerializeField] private TextMeshProUGUI _resultName;
-    [SerializeField] private Transform _ingredientImagesContainer;
+    [SerializeField] private Transform _ingredientImagesContainer, _worldIngredientImagesContainer;
     [SerializeField] private CursorManager _cursor;
     
     private PanelComponent _panelComponent;
     private int _currentPreparationIndex = 0;
     private List<PreparationSO> _unlockedPreparationsSOs;
 
-    public Image ResultImage => _resultImage;
-
-    public TextMeshProUGUI ResultName => _resultName;
-
-    public Transform IngredientImagesContainer => _ingredientImagesContainer;
-
     private void Start()
     {
         _panelComponent = GetComponent<PanelComponent>();
-        
         ClearBookUI();
     }
 
     public void OpenBookUI()
     {
         _unlockedPreparationsSOs = _saveManager.PlayerSave.UnlockedPreparationsSOs;
-
         if (_unlockedPreparationsSOs.Count <= 0) return;
         
         Debug.Log("There is more than 0 preps unlocked!");
@@ -55,7 +46,12 @@ public class BookUI : MonoBehaviour
 
     private void ClearBookUI()
     {
-        foreach (Transform child in IngredientImagesContainer)
+        foreach (Transform child in _ingredientImagesContainer)
+        {
+            child.gameObject.SetActive(false);
+        }
+        
+        foreach (Transform child in _worldIngredientImagesContainer)
         {
             child.gameObject.SetActive(false);
         }
@@ -65,19 +61,29 @@ public class BookUI : MonoBehaviour
     {
         ClearBookUI();
         
-        ResultImage.sprite = _unlockedPreparationsSOs[preparationIndex].ResultIngredientSO.Sprite;
-        ResultName.text = _unlockedPreparationsSOs[preparationIndex].ResultIngredientSO.Name;
+        // Screen UI
+        _resultImage.sprite = _unlockedPreparationsSOs[preparationIndex].ResultIngredientSO.Sprite;
+        _resultName.text = _unlockedPreparationsSOs[preparationIndex].ResultIngredientSO.Name;
+        
+        // World UI
+        _worldResultImage.sprite = _resultImage.sprite;
+        _worldResultImage.enabled = true;
 
         int imageIndex = 0;
         foreach (var ingredientSO in _unlockedPreparationsSOs[preparationIndex].Ingredients)
         {
-            var ingredientImage = IngredientImagesContainer.GetChild(imageIndex).GetChild(0);
+            // Screen UI
+            var ingredientImage = _ingredientImagesContainer.GetChild(imageIndex).GetChild(0);
             ingredientImage.GetComponent<Image>().sprite = ingredientSO.Sprite;
             ingredientImage.parent.gameObject.SetActive(true);
+            
+            // World UI
+            ingredientImage = _worldIngredientImagesContainer.GetChild(imageIndex).GetChild(0);
+            ingredientImage.GetComponent<Image>().sprite = ingredientSO.Sprite;
+            ingredientImage.parent.gameObject.SetActive(true);
+            
             imageIndex++;
         }
-        
-        _bookWorldUI.UpdateUI(this);
     }
     
     public void ShowNextPreparation()

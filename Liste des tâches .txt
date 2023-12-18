@@ -4,9 +4,10 @@ Liste des tâches :
 ⬤ Création des ingrédients de base à l’aide de ScriptableObjects - Done
 ⬤ Préparation, création de nouveaux ingrédients via les mécaniques de drag & drop et de cuisson - Done
 ⬤ Sauvegarde des recettes découvertes - Done
-⬤ Affichage des recettes découvertes (in-game) - 
+⬤ Affichage des recettes découvertes (in-game) - Done
+⬤ Création de chaque ingrédient et recettes (final) - In progress
+⬤ Gestion de la monnaie --> Stockage dans PlayerSave
+⬤ Commandes depuis le comptoir --> 
+⬤ Vente des préparations au comptoir --> Ajout de monnaie selon bonne/mauvaise recette
 ⬤ Menu principal
-⬤ Affichage des recettes réelles dans le menu principal
-⬤ Gestion de la monnaie
-⬤ Vente des préparations au comptoir
-⬤ Commandes depuis le comptoir
+⬤ Affichage des recettes réelles dans le menu principal --> Association d'une recette réelle (RealPreparationSO) à chaque PreparationSO, avec un nom, une description, une photo, une liste d'ingrédients (textes[] qui contiennent le grammage/volume directement), une liste d'étapes de préparation (textes[])

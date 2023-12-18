@@ -5,11 +5,13 @@ namespace Managers
 {
     public class SaveManager : MonoBehaviour
     {
+        [SerializeField] private bool _resetSave = false;
+        
         public PlayerSave PlayerSave { get; private set; }
 
         private void Start()
         {
-            if (PlayerPrefs.HasKey("PlayerSave"))
+            if (PlayerPrefs.HasKey("PlayerSave") && !_resetSave)
             {
                 // if there is a save, don't create a new one.
                 PlayerSave = JsonUtility.FromJson<PlayerSave>(PlayerPrefs.GetString("PlayerSave"));

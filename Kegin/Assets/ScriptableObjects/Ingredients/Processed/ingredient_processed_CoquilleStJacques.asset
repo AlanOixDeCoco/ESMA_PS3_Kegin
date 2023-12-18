@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e158ea87ca6f5498bd4d23d23a873f, type: 3}
   m_Name: ingredient_processed_CoquilleStJacques
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  _name: 
+  _sprite: {fileID: 21300000, guid: f8f9438ef69dffe41a92de75c26f30ee, type: 3}
+  _name: Coquilles St Jacques de St Brieuc
   _storage: 0
   _saleable: 1

@@ -29,8 +29,6 @@ public class BookUI : MonoBehaviour
         _unlockedPreparationsSOs = _saveManager.PlayerSave.UnlockedPreparationsSOs;
         if (_unlockedPreparationsSOs.Count <= 0) return;
         
-        Debug.Log("There is more than 0 preps unlocked!");
-        
         _cursor.SetUIState();
         
         ShowPreparation(_currentPreparationIndex);

@@ -5,8 +5,8 @@ Liste des tâches :
 ⬤ Préparation, création de nouveaux ingrédients via les mécaniques de drag & drop et de cuisson - Done
 ⬤ Sauvegarde des recettes découvertes - Done
 ⬤ Affichage des recettes découvertes (in-game) - Done
-⬤ Création de chaque ingrédient et recettes (final) - In progress
-⬤ Gestion de la monnaie --> Stockage dans PlayerSave
+⬤ Création de chaque ingrédient et recettes (final) - Done
+⬤ Gestion de la monnaie --> Stockage dans PlayerSave - Done
 ⬤ Commandes depuis le comptoir --> 
 ⬤ Vente des préparations au comptoir --> Ajout de monnaie selon bonne/mauvaise recette
 ⬤ Menu principal

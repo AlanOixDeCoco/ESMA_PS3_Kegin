@@ -96,15 +96,20 @@ public class CursorManager : MonoBehaviour
         }
         else
         {
+            if(hit.collider.TryGetComponent<Interactive>(out var interactiveComponent))
+                if(interactiveComponent.ActiveDuringDrag) interactiveComponent.Interact();
+            
             _canDrop = hit.collider.TryGetComponent(out _droppable);
             if (_canDrop)
             {
                 _droppable.TryGetComponent<Inventory>(out var inventoryComponent);
                 _canDrop = !inventoryComponent.Ingredients.Contains(_draggedIngredientSO);
-                _droppable.TryGetComponent<Interactive>(out var interactiveComponent);
                 _canDrop  &= interactiveComponent.Interactable;
+                
+                if(interactiveComponent.ActiveDuringDrag) interactiveComponent.Interact();
             }
         }
+        
         _draggedIngredientDraggable.SetDroppableHint(_canDrop);
     }
 

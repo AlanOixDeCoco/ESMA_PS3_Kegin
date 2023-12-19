@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e158ea87ca6f5498bd4d23d23a873f, type: 3}
   m_Name: ingredient_processed_GratinChouxFleur
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  _sprite: {fileID: 21300000, guid: 2a8bc9525e7629c46a9feb7086eb5a0f, type: 3}
   _name: "Gratin de choux-fleur de St-Pol-de-L\xE9on"
   _storage: 0
   _saleable: 1

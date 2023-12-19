@@ -7,12 +7,12 @@ namespace Save
     public class PlayerSave
     {
         // List of inventory ingredients (not sorted by storage type)
-        public readonly Dictionary<IngredientSO, int> InventoryIngredients = new();
+        public Dictionary<IngredientSO, int> InventoryIngredients = new();
 
         // List of discovered preparations
-        public readonly List<PreparationSO> UnlockedPreparationsSOs = new();
+        public List<PreparationSO> UnlockedPreparationsSOs = new();
 
-        public int Currency { get; private set; }
+        public int Currency = 0;
 
         public void AddCurrency(int amount)
         {

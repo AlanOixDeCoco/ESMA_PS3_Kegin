@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa971a158e9380e4ba9e9c206d70e6bf, type: 3}
-  m_Name: preparation_step1_Crepe
+  m_Name: preparation_step1_CakePommes
   m_EditorClassIdentifier: 
   _tool: 0
   _ingredientsSOs:
   - {fileID: 11400000, guid: 43cab76e8e7ad4641a05671d6f1e6cf7, type: 2}
   - {fileID: 11400000, guid: a685fdef7ed528646b5594525298085d, type: 2}
   - {fileID: 11400000, guid: 5302614642dd236469bc78f9b7e90344, type: 2}
-  - {fileID: 11400000, guid: 6ee0cc38635ac0245ba9fa84d0a3b43f, type: 2}
-  _resultIngredientSO: {fileID: 11400000, guid: baf71a9b86f161747bd0a16171b336ac,
+  - {fileID: 11400000, guid: 7890058103f79d24eabaaeabc7a6f278, type: 2}
+  _resultIngredientSO: {fileID: 11400000, guid: 1633f73639a9ef94e8a435cb5864eda2,
     type: 2}

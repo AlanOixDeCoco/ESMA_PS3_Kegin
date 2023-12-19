@@ -25,9 +25,6 @@ namespace Managers
         [Header("UI")]
         [SerializeField] private GameObject _toKitchenUI;
         [SerializeField] private GameObject _toCounterUI;
-        
-        [Header("Colliders")]
-        [SerializeField] private Collider[] _kitchenColliders;
 
         private void Start()
         {
@@ -55,22 +52,6 @@ namespace Managers
             
             _toCounterUI.SetActive(true);
             _toKitchenUI.SetActive(false);
-            
-            UpdateColliders(false);
-        }
-
-        private void Update()
-        {
-            UpdateColliders(((_kitchenState == KitchenStates.Kitchen) && !_cameraBrain.IsBlending));
-            Debug.Log(_cameraBrain.IsBlending);
-        }
-
-        private void UpdateColliders(bool enable)
-        {
-            foreach (var kitchenCollider in _kitchenColliders)
-            {
-                kitchenCollider.enabled = enable;
-            }
         }
     }
 }

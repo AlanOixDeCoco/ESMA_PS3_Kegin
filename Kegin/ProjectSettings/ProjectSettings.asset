@@ -258,7 +258,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 1
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 0}
+  androidSplashScreen: {fileID: 2800000, guid: 597802ae0b4415645aa316b67500a71c, type: 3}
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
   AndroidEnableArmv9SecurityFeatures: 0
@@ -283,7 +283,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 26c4c4d5eb0f47b44a21091b5cb2a898, type: 3}
+      m_Icon: {fileID: 2800000, guid: 597802ae0b4415645aa316b67500a71c, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

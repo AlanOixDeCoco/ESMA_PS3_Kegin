@@ -1,3 +1,4 @@
+using Cinemachine;
 using ScriptableObjects.Ingredients;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,7 @@ public enum CursorStates
 public class CursorManager : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private CinemachineBrain _cameraBrain;
     [FormerlySerializedAs("_draggedIngredientImage")] [SerializeField] private RectTransform _draggedIngredientRectTransform;
     [SerializeField] private Inventory _dryInventory, _shelvesInventory, _fridgeInventory;
 
@@ -49,6 +51,9 @@ public class CursorManager : MonoBehaviour
 
     private void Interact()
     {
+        // Check if the camera is blending
+        if (_cameraBrain.IsBlending) return;
+        
         // Check if a touch is being registered
         if (Input.touchCount == 0) return;
 

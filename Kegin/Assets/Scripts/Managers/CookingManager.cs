@@ -15,7 +15,9 @@ namespace Managers
         private readonly Dictionary<IngredientSO, List<PreparationSO>> _ingredientsRelations = new();
 
         private SaveManager _saveManager;
-        
+
+        public PreparationSO[] PreparationsSOs => _preparationsSOs;
+
         private void Start()
         {
             _saveManager = GetComponent<SaveManager>();

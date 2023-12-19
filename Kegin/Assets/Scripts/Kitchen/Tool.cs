@@ -41,12 +41,6 @@ namespace Kitchen
             // Deactivate the interactive component
             _interactiveComponent.Interactable = false;
             
-            // Get the ingredient that will be returned when the cooking is done
-            var result = _cookingManager.GetPreparationResult(_inventory.Ingredients);
-            
-            _inventory.ClearInventory();
-            _inventory.AddIngredient(result);
-            
             float cookedFor = 0f;
             while (cookedFor < _cookingTime)
             {
@@ -57,6 +51,11 @@ namespace Kitchen
                 
                 yield return null;
             }
+            
+            // Get the ingredient that will be returned when the cooking is done
+            var result = _cookingManager.GetPreparationResult(_inventory.Ingredients);
+            _inventory.ClearInventory();
+            _inventory.AddIngredient(result);
             
             _onCookingEnd.Invoke();
             

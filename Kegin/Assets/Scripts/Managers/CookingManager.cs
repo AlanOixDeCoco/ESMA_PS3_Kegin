@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using ScriptableObjects.Ingredients;
 using ScriptableObjects.Preparations;
@@ -9,6 +10,7 @@ namespace Managers
     {
         [SerializeField] private PreparationSO[] _preparationsSOs;
         [SerializeField] private IngredientSO _badResultIngredientSO;
+        [SerializeField] private BookUI _bookUI;
 
         private readonly Dictionary<IngredientSO, List<PreparationSO>> _ingredientsRelations = new();
 
@@ -31,32 +33,39 @@ namespace Managers
             }
         }
 
-        private bool TryGetPreparation(in List<IngredientSO> ingredientSOs, out PreparationSO preparationSO)
+        private bool TryGetPreparation(in List<IngredientSO> inIngredientSOs, out PreparationSO outPreparationSO)
         {
-            foreach (var ingredient in ingredientSOs)
+            // New algorithm -->
+            // 1 - Get the list of all the possible preparations based on the number of ingredients --> If none : return fail
+            var possiblePreparationsSOs = new List<PreparationSO>();
+            foreach (var preparationSO in _preparationsSOs)
             {
-                if(!_ingredientsRelations.ContainsKey(ingredient)) continue;
-                foreach (var preparation in _ingredientsRelations[ingredient])
-                {
-                    // If the number of ingredients does not match --> Skip
-                    if(preparation.Ingredients.Length != ingredientSOs.Count) continue;
-                    
-                    // If the ingredients do not match --> Skip
-
-                    bool ingredientsMatch = false;
-                    foreach (var preparationIngredient in preparation.Ingredients)
-                    {
-                        ingredientsMatch = ingredientSOs.Contains(preparationIngredient);
-                    }
-                    if (!ingredientsMatch) continue;
-                    
-                    // If we haven't skip yet the prep is possible (same num of ingredients & same ingredients)
-                    preparationSO = preparation;
-                    return true;
-                }
+                if(preparationSO.Ingredients.Length == inIngredientSOs.Count) possiblePreparationsSOs.Add(preparationSO);
             }
+            
+            if(possiblePreparationsSOs.Count == 0)
+            {
+                // We didn't find a possible preparation
+                outPreparationSO = null;
+                return false;
+            }
+            
+            // 2 - Remove every preparation that doesn't contain one of the ingredients
+            foreach (var possiblePreparationSO in possiblePreparationsSOs)
+            {
+                bool isPreparationPossible = true;
+                foreach (var ingredientSO in inIngredientSOs)
+                {
+                    isPreparationPossible &= Array.IndexOf(possiblePreparationSO.Ingredients, ingredientSO) != -1;
+                }
+                if (!isPreparationPossible) continue;
+                
+                outPreparationSO = possiblePreparationSO;
+                return true;
+            }
+                
             // We didn't find a possible preparation
-            preparationSO = null;
+            outPreparationSO = null;
             return false;
         }
 
@@ -71,6 +80,7 @@ namespace Managers
                 // --> If not unlocked already
                 _saveManager.PlayerSave.UnlockedPreparationsSOs.Add(preparationSO);
                 _saveManager.Save();
+                _bookUI.DisplayNewPreparation(); // Open book UI to see new preparation
                 
                 // Then return the preparaion result
                 return preparationSO.ResultIngredientSO;

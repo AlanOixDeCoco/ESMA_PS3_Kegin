@@ -57,6 +57,12 @@ public class BookUI : MonoBehaviour
         }
     }
 
+    public void DisplayNewPreparation()
+    {
+        _currentPreparationIndex = _unlockedPreparationsSOs.Count - 1;
+        OpenBookUI();
+    }
+
     private void ShowPreparation(int preparationIndex)
     {
         ClearBookUI();

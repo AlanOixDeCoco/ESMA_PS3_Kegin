@@ -59,6 +59,7 @@ public class BookUI : MonoBehaviour
 
     public void DisplayNewPreparation()
     {
+        _unlockedPreparationsSOs = _saveManager.PlayerSave.UnlockedPreparationsSOs;
         _currentPreparationIndex = _unlockedPreparationsSOs.Count - 1;
         OpenBookUI();
     }
